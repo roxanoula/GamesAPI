@@ -21,6 +21,9 @@ public class Users {
         this.username = username;
     }
 
+    public Users(String username) {
+        this.username = username;
+    }
     public Users(){
 
     }

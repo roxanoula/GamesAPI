@@ -15,7 +15,7 @@ public class GamesController {
         this.gamesService = gamesService;
     }
     @GetMapping
-    public List<Games> getGames() {
+    public List<Games> getAllGames() {
         return gamesService.getGames();
     }
 

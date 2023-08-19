@@ -30,6 +30,10 @@ public class Games {
         this.name = name;
     }
 
+    public Games(String name) {
+        this.name = name;
+    }
+
     public Games() {
 
     }

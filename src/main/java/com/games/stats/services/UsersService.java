@@ -2,6 +2,7 @@ package com.games.stats.services;
 
 import com.games.stats.entities.Users;
 import com.games.stats.repositories.UsersRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -16,8 +17,12 @@ public class UsersService {
     public UsersService(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }
-    public List<Users> getUsers() {
+    public List<Users> getAllUsers() {
         return usersRepository.findAll();
+    }
+
+    public Optional<Users> getUserByUsername(String username) {
+        return usersRepository.findUserByUsername(username);
     }
 
     public void addNewUser(Users userData) throws SQLException {
@@ -28,5 +33,19 @@ public class UsersService {
         }
 
         usersRepository.save(userData);
+    }
+
+    @Transactional
+    public void updateUser(String username, String firstName, String lastName) {
+        Users user = usersRepository.findById(username)
+                .orElseThrow(() -> new IllegalStateException("User with username: " + username + "does not exist in the database"));
+
+        if (firstName != null && firstName.length() > 0) {
+            user.setFirstName(firstName);
+        }
+
+        if (lastName != null && lastName.length() > 0) {
+            user.setLastName(lastName);
+        }
     }
 }
