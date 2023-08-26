@@ -20,11 +20,20 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
 	testImplementation 'junit:junit:4.13.2'
-	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
-	implementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+	testImplementation 'org.testcontainers:postgresql:1.19.0'
+	testImplementation 'org.testcontainers:testcontainers:1.19.0'
+	testImplementation 'org.testcontainers:junit-jupiter:1.19.0'
+
+	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'org.springframework.boot:spring-boot-starter-actuator:3.0.0'
+
+
 }
 
 tasks.named('test') {
