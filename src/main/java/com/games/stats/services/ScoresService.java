@@ -26,8 +26,8 @@ public class ScoresService {
         this.usersRepository = usersRepository;
     }
 
-    public List<Scores> getScores() {
-        return scoresRepository.findAll();
+    public List<Scores> getAllScoresByGame(long gameId) {
+        return scoresRepository.findAllScoresByGame(gameId);
     }
 
     public void addNewScore(Scores score) throws SQLException {

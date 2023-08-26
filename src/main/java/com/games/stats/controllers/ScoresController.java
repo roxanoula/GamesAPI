@@ -1,6 +1,5 @@
 package com.games.stats.controllers;
 
-import com.games.stats.entities.Games;
 import com.games.stats.entities.Scores;
 import com.games.stats.services.ScoresService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/api/v1/scores")
@@ -21,8 +19,8 @@ public class ScoresController {
     }
 
     @GetMapping
-    public List<Scores> getScores(){
-        return scoresService.getScores();
+    public List<Scores> getScoresByGame(@RequestParam(name="gid") long gameId){
+        return scoresService.getAllScoresByGame(gameId);
     }
 
     @PostMapping
