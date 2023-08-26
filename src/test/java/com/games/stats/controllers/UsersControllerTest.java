@@ -1,8 +1,11 @@
 package com.games.stats.controllers;
 
+import com.games.stats.configurations.TestContainer;
 import com.games.stats.entities.Users;
 import com.games.stats.repositories.UsersRepository;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +31,18 @@ public class UsersControllerTest {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    private static PostgreSQLContainer testContainer = new TestContainer().getTestContainer();
+
+    @BeforeAll
+    public static void beforeAll() {
+        testContainer.start();
+    }
+
+    @AfterAll
+    public static void afterAll() {
+        testContainer.close();
+    }
 
     @Test
     @Transactional
