@@ -19,13 +19,20 @@ public class ScoresController {
     }
 
     @GetMapping
-    public List<Scores> getScoresByGame(@RequestParam(name="gid") long gameId){
+    @RequestMapping(params="gid")
+    public List<Scores> getAllScoresByGame(@RequestParam(name="gid") long gameId){
         return scoresService.getAllScoresByGame(gameId);
+    }
+
+    @GetMapping
+    @RequestMapping(params={"user", "game"})
+    public List<Scores> getScoresByUserAndGame(@RequestParam(name="user") String username,
+                                               @RequestParam(name="game") String game) throws SQLException {
+        return scoresService.getScoresByUserAndGame(username, game);
     }
 
     @PostMapping
     public void addNewScore(@RequestBody Scores score) throws SQLException {
         scoresService.addNewScore(score);
     }
-
 }

@@ -25,18 +25,20 @@ public class Scores {
     private Users user;
     private Long score = Long.valueOf(0);
 
-    public Scores(Long id, Long score ) {
+    public Scores(Long score, String game, String username) {
         this.id = id;
         this.score = score;
     }
 
-    public Scores(Long id) {
+    public Scores(Long score, Games game, Users user) {
         this.id = id;
+        this.score = score;
+        this.game = game;
+        this.user = user;
     }
 
-    public Scores() {
+    public Scores() {}
 
-    }
 
     public Long getId() { return id;}
 
