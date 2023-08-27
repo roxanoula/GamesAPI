@@ -26,8 +26,16 @@ public class ScoresService {
         this.usersRepository = usersRepository;
     }
 
-    public List<Scores> getScores() {
-        return scoresRepository.findAll();
+    public List<Scores> getAllScoresByGame(long gameId) {
+        return scoresRepository.findAllScoresByGame(gameId);
+    }
+
+    public List<Scores> getScoresByUserAndGame(String username, String game) throws SQLException {
+        Optional<Games> gameOptional = gamesRepository.findByName(game);
+        if (!gameOptional.isPresent()) {
+            throw new SQLException("The provided game doesn't exist in the database");
+        }
+        return scoresRepository.getScoresByUserAndGame(username, gameOptional.get().getId());
     }
 
     public void addNewScore(Scores score) throws SQLException {
@@ -52,5 +60,11 @@ public class ScoresService {
 
 
         scoresRepository.save(score);
+    }
+
+    public void addListOfScores(List<Scores> listOfScores) throws SQLException {
+        for (Scores score: listOfScores) {
+            addNewScore(score);
+        }
     }
 }
